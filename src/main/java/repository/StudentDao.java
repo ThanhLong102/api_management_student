@@ -7,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import util.HibernateUtil;
 
-import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -124,8 +123,8 @@ public class StudentDao implements StudentDaoImpl {
                     "    SELECT a.*, rownum r__" +
                     "    FROM" +
                     "    (" +
-                    "        SELECT * FROM Student " + "where to_char(:p_student_date1, 'ddMMyyyy') <= " +
-                    "                    to_char(birthday, 'ddMMyyyy') and to_char(:p_student_date2, 'ddMMyyyy') >= to_char(birthday, 'ddMMyyyy')" +
+                    "        SELECT * FROM Student " + "where :p_student_date1 <= " +
+                    "                   birthday and :p_student_date2 >= birthday" +
                     "        ORDER BY id" +
                     "    ) a" +
                     "    WHERE rownum < ((:pageNumber * :pageSize) + 1 )" +
